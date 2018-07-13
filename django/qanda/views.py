@@ -27,6 +27,7 @@ class DailyQuestionList(DayArchiveView):
     date_field='created'
     month_format='%m'
     allow_empty=True
+
 class UpdateAnswerAcceptance(LoginRequiredMixin,UpdateView):
     form_class=AnswerAcceptanceForm
     queryset=Answer.objects.all()
