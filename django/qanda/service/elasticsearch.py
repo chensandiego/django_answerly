@@ -10,6 +10,19 @@ FAILED_TO_LOAD_ERROR = ' Failed to load {}: {!r}'
 
 logger=logging.getLogger(__name__)
 
+
+
+def search_for_questions(query):
+    client=get_client()
+    result=client.search(index=settings.ES_INDEX,body={'query':{
+        'match':{
+            'text':query,
+        },
+    },
+    })
+    return (h['_source'] for h in result['hits']['hits'])
+
+
 def get_client():
     return Elasticsearch(hosts=[
         {'host':settings.ES_HOST,'port':settings.ES_PORT,}
