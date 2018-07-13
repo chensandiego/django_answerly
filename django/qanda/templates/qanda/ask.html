@@ -24,6 +24,7 @@
 
     <form method="post">
       {{ form| crispy }}
+      {% csrf_token %}
       <button class="btn btn-primary" type="submit" name="action" value="PREVIEW">
         preview</button>
 

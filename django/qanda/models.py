@@ -17,6 +17,16 @@ class Question(models.Model):
     def get_absolute_url(self):
         return reverse('questions:question_detail',kwargs={'pk':self.id})
 
+    def as_elasticsearch_dict(self):
+        return {
+            '_id' : self.id,
+            '_type': 'doc',
+            'text':'{}\n{}'.format(self.title,self.question),
+            'question_body':self.question,
+            'title':self.title,
+            'id':self.id,
+            'created':self.created,
+        }
     def can_accept_answers(self,user):
         return user == self.user
 

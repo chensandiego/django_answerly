@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'user',
     'qanda',
+    'markdownify',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -135,6 +136,9 @@ LOGIN_URL='user:login'
 LOGIN_REDIRECT_URL='questions:index'
 LOGOUT_REDIRECT_URL='questions:index'
 
+ES_INDEX='answerly'
+ES_HOST='localhost'
+ES_PORT='9200'
 
 MARKDOWNIFY_STRIP=False
 MARKDOWNIFY_WHITELIST_TAGS=[
