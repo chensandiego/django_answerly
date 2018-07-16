@@ -12,7 +12,21 @@ from django.views.generic import (
 
 from qanda.forms import QuestionForm,AnswerForm,AnswerAcceptanceForm
 from qanda.models import Question,Answer
+from django.views.generic import TemplateView
+from qanda.service.elasticsearch import search_for_questions
 
+
+class SearchView(TemplateView):
+    template_name='qanda/search.html'
+
+    def get_context_data(self,**kwargs):
+        query=self.request.GET.get('q',None)
+        ctx=super().get_context_data(query=query,**kwargs)
+        if query:
+            results=search_for_questions(query)
+            ctx['hits']=results
+        return ctx
+        
 
 class TodaysQuestionList(RedirectView):
     def get_redirect_url(self,*args,**kwargs):
