@@ -3,10 +3,17 @@ from unittest.mock import patch
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.test import TestCase,RequestFactory
+
+from selenium.webdriver.chrome.webdriver import WebDriver
+
+from qanda.factories import QuestionFactory,DEFAULT_BODY_HTML
 
 from elasticsearch import Elasticsearch
 from qanda.models import Question
+from qanda.views import DailyQuestionList
+from user.factories import UserFactory
 
 
 class DailyQuestionListTestCase(TestCase):
@@ -58,7 +65,7 @@ class DailyQuestionListTestCase(TestCase):
             date=question.created.strftime(QUESTION_CREATED_STRFTIME)
             )
             self.assertInHTML(needle,rendered_content)
-            
+
 
 class QuestionSaveTestCase(TestCase):
 

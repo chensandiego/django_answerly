@@ -146,3 +146,4 @@ MARKDOWNIFY_WHITELIST_TAGS=[
 ]
 
 CRISPY_TEMPLATE_PACK='bootstrap4'
+CHROMEDRIVER=os.path.join(BASE_DIR,'../chromedriver')
